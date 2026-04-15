@@ -1,3 +1,58 @@
 <resources>
+    <!-- 应用基本信息 -->
     <string name="app_name">TodoApp</string>
+    <string name="app_description">高效管理您的待办事项</string>
+
+    <!-- 通用按钮文本 -->
+    <string name="button_save">保存</string>
+    <string name="button_cancel">取消</string>
+    <string name="button_delete">删除</string>
+    <string name="button_edit">编辑</string>
+    <string name="button_add">添加</string>
+    <string name="button_login">登录</string>
+    <string name="button_register">注册</string>
+    <string name="button_logout">退出登录</string>
+
+    <!-- 界面标题 -->
+    <string name="title_main">我的待办</string>
+    <string name="title_login">用户登录</string>
+    <string name="title_register">用户注册</string>
+    <string name="title_add_todo">添加事项</string>
+    <string name="title_edit_todo">编辑事项</string>
+    <string name="title_profile">个人中心</string>
+    <string name="title_settings">设置</string>
+    <string name="title_categories">分类管理</string>
+
+    <!-- 提示信息 -->
+    <string name="hint_username">用户名</string>
+    <string name="hint_password">密码</string>
+    <string name="hint_email">邮箱地址</string>
+    <string name="hint_todo_title">事项标题</string>
+    <string name="hint_todo_description">事项描述</string>
+    <string name="hint_search">搜索事项</string>
+
+    <string name="error_empty_field">此字段不能为空</string>
+    <string name="error_invalid_email">邮箱格式不正确</string>
+    <string name="error_password_mismatch">两次密码不一致</string>
+    <string name="error_login_failed">登录失败，请检查用户名密码</string>
+
+    <string name="message_logout_success">已成功退出登录</string>
+    <string name="message_todo_added">事项添加成功</string>
+    <string name="message_todo_updated">事项更新成功</string>
+    <string name="message_todo_deleted">事项已删除</string>
+
+    <!-- 导航菜单 -->
+    <string name="nav_home">首页</string>
+    <string name="nav_categories">分类</string>
+    <string name="nav_profile">我的</string>
+
+    <!-- 通知相关 -->
+    <string name="notification_channel_reminders">提醒通知</string>
+    <string name="notification_channel_description">待办事项的提醒通知</string>
+    <string name="notification_title_reminder">待办事项提醒</string>
+
+    <!-- 空状态提示 -->
+    <string name="empty_todos">暂无待办事项，点击右下角添加</string>
+    <string name="empty_categories">暂无分类，请添加分类</string>
+
 </resources>
