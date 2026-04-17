@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 文本样式 -->
+    <style name="Text.Title" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/背景_文字</item>
+    </style>
+    
+    <style name="Text.Subtitle" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/背景_文字</item>
+    </style>
+    
+    <style name="Text.Body" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/背景_文字</item>
+    </style>
+    
+    <!-- 按钮样式 -->
+    <style name="Button.Primary" parent="Widget.MaterialComponents.Button">
+        <item name="android:background">@drawable/bg_button_primary</item>
+        <item name="android:textColor">@color/白色</item>
+        <item name="android:paddingVertical">12dp</item>
+        <item name="android:paddingHorizontal">24dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:layout_margin">8dp</item>
+    </style>
+    
+    <!-- 输入框样式 -->
+    <style name="EditText.Primary" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:background">@drawable/bg_button_primary</item>
+        <item name="android:textColor">@color/背景_文字</item>
+        <item name="android:padding">16dp</item>
+        <item name="android:layout_margin">8dp</item>
+    </style>
+    
+    <!-- 卡片样式 -->
+    <style name="Card.Primary" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/表面</item>
+        <item name="cardCornerRadius">8dp</item>
+        <item name="cardElevation">4dp</item>
+        <item name="android:layout_margin">8dp</item>
+    </style>
+</resources>

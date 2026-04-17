@@ -5,7 +5,6 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
-import androidx.room.Room
 import com.example.todoapp.data.database.AppDatabase
 
 /**
@@ -14,12 +13,8 @@ import com.example.todoapp.data.database.AppDatabase
  */
 class TodoApplication : Application() {
 
-    // 数据库实例，使用伴生对象实现单例模式
+    // 应用上下文，使用伴生对象实现单例模式
     companion object {
-        // 数据库实例，静态变量存储
-        lateinit var database: AppDatabase
-            private set
-        
         // 应用上下文，方便在非Activity类中获取
         lateinit var appContext: Context
             private set
@@ -36,7 +31,7 @@ class TodoApplication : Application() {
         appContext = applicationContext
         
         // 初始化Room数据库
-        initDatabase()
+        AppDatabase.init(applicationContext)
         
         // 创建通知渠道（Android 8.0+）
         createNotificationChannels()
@@ -46,22 +41,6 @@ class TodoApplication : Application() {
         
         // 初始化第三方库（如果需要）
         initThirdPartyLibraries()
-    }
-
-    /**
-     * 初始化Room数据库实例
-     * 使用Room.databaseBuilder创建单例数据库实例
-     * fallbackToDestructiveMigration()在数据库版本更新时会销毁旧数据并重建
-     * 实际生产环境中应使用迁移策略
-     */
-    private fun initDatabase() {
-        database = Room.databaseBuilder(
-            applicationContext,
-            AppDatabase::class.java,
-            "todo_app_database"
-        )
-            .fallbackToDestructiveMigration() // 数据库版本更新时销毁旧数据
-            .build()
     }
 
     /**
