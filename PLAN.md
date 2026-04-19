@@ -125,7 +125,7 @@ TodoApp/
 │   │   │   │
 │   │   │   └── AndroidManifest.xml                  # 应用清单文件（权限和组件注册）
 │   │   │
-│   │   └── java/com/example/todoapp/worker/        # 后台任务处理
+│   │   └── java/com/example/todoapp/worker/        # 后台任务处理![img.png](img.png)
 │   │       └── ReminderWorker.kt                    # 提醒后台任务处理
 │   │
 │   ├── build.gradle.kts                             # 模块构建脚本（Kotlin DSL）
@@ -210,31 +210,31 @@ TodoApp/
     - 调用Repository完成注册
     - 注册成功后自动登录
 
-### 🏠 第三阶段：主界面和底部导航（2天）
+### 🏠 第三阶段：主界面和底部导航（2天） ✔
 
-14. **`activity_main.xml`** - 主界面布局
+14. **`activity_main.xml`** - 主界面布局  ✔
     - 设计底部导航栏容器
     - 布局Fragment容器区域
     - 集成工具栏
 
-15. **`bottom_nav_menu.xml`** - 底部导航菜单
+15. **`bottom_nav_menu.xml`** - 底部导航菜单 ✔
     - 定义三个导航项：首页、分类、我的
     - 配置图标和文字
     - 设置默认选中项
-
-16. **`MainActivity.kt`** - 主界面逻辑
+ 
+16. **`MainActivity.kt`** - 主界面逻辑  ✔
     - 初始化底部导航
     - 管理Fragment切换
     - 处理返回键逻辑
     - 检查登录状态
 
-17. **`fragment_home.xml`** - 首页Fragment布局
+17. **`fragment_home.xml`** - 首页Fragment布局  ✔
     - 设计RecyclerView列表
     - 添加FloatingActionButton
     - 集成下拉刷新
     - 空数据提示布局
 
-18. **`HomeFragment.kt`** - 首页Fragment逻辑
+18. **`HomeFragment.kt`** - 首页Fragment逻辑  ✔
     - 初始化RecyclerView适配器
     - 加载待办事项数据
     - 处理添加事项点击

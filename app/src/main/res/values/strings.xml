@@ -45,6 +45,11 @@
     <string name="nav_home">首页</string>
     <string name="nav_categories">分类</string>
     <string name="nav_profile">我的</string>
+    <string name="title1">待办事项</string>
+    <string name="title2">首页</string>
+    <string name="title3">分类</string>
+    <string name="title4">我的</string>
+
 
     <!-- 通知相关 -->
     <string name="notification_channel_reminders">提醒通知</string>

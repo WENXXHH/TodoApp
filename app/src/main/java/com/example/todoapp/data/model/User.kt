@@ -47,7 +47,7 @@ class User {
     
     /**
      * 验证用户名是否有效
-     * @return 用户名是否有效
+     * @return 用户名是否有效\
      */
     fun isUsernameValid(): Boolean {
         return username.isNotBlank() && username.length >= 3
