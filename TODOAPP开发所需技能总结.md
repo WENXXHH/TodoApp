@@ -6,7 +6,12 @@
 
 #### AppDatabase.kt           # Room数据库定义和初始化
 
-#### TodoDao.kt               # 待办事项数据访问接口
+#### TodoDao.kt # 待办事项数据访问接口  ✔
+    - 去学习有关Dao有关的room知识
+    - 定义CRUD操作接口
+    - 实现按时间排序查询
+    - 添加置顶事项优先查询
+    - 获取需要提醒的事项
 
 #### UserDao.kt # 用户数据访问接口 ✔
     - 去学习有关Dao有关的room知识
@@ -16,7 +21,12 @@
 
 ### model/
 
-#### TodoItem.kt              # 待办事项数据模型
+#### TodoItem.kt  # 待办事项数据模型 ✔
+    - 依旧欠缺room方面的知识等待学习，依旧待办事项相关数据
+    - 定义事项核心字段
+    - 实现状态管理（完成/未完成）
+    - 提供时间格式化方法
+    - 支持置顶功能标记
 
 #### User.kt   # 用户数据模型  ✔
     - 学会用与数据库储存的实体类创建，
@@ -28,12 +38,17 @@
 ###  repository/
 
 #### TodoRepository.kt # 待办事项业务逻辑封装  ✔
+    - 依旧神秘封装
+    - 封装数据操作
+    - 处理事项状态更新
+    - 管理提醒设置
+    - 实现搜索过滤功能
+
+#### UserRepository.kt  # 用户业务逻辑封装  ✔
     - 学习有关repository的room知识
     - 封装用户注册流程
     - 实现登录认证逻辑
     - 处理用户信息更新
-
-#### UserRepository.kt        # 用户业务逻辑封装
 
 ## **utils/**
 
@@ -47,7 +62,8 @@
 
 ## **adapter/**
 
-###  TodoAdapter.kt              # 待办事项列表适配器
+###  TodoAdapter.kt # 待办事项列表适配器  ✔
+    - 依旧神奇难实现的适配器 ， 重新学习这一部分的内容是非常有必要的了
 
 ###  CategoryAdapter.kt          # 分类列表适配器
 
@@ -74,10 +90,12 @@
     - 学会优雅的Activity代码编辑方式，也就是精通函数式编程，处理控件id和点击事件
     - 学会编写注册的逻辑
 
-###  AddTodoActivity.kt          # 添加待办事项Activity
+###  AddTodoActivity.kt  # 添加待办事项Activity
+    - 依旧优雅，但是有一点，就是实现点击事件的代码有点复杂，等待继续钻研
 
-###  EditTodoActivity.kt         # 编辑待办事项Activity
-
+###  EditTodoActivity.kt   # 编辑待办事项Activity ✔
+    - 依旧是优雅以及复杂的实现逻辑，等待模仿实现
+    
 ###  ProfileActivity.kt          # 用户信息界面Activity
 
 ## **fragment/**
@@ -127,9 +145,8 @@
 ###  activity_register.xml # 注册界面布局 ✔
     - 优美的注册页面布局示例
 
-### │   │   │   │   │   ├── activity_add_todo.xml        # 添加待办事项布局
-
-### │   │   │   │   │   ├── activity_edit_todo.xml       # 编辑待办事项布局
+###  activity_todo_form.xml # 添加待办事项布局  ✔
+    - 精美添加待办事项的布局
 
 ### │   │   │   │   │   ├── activity_profile.xml         # 用户信息界面布局
 
@@ -144,7 +161,8 @@
 
 ### │   │   │   │   │   ├── fragment_settings.xml        # 设置Fragment布局
 
-### │   │   │   │   │   ├── item_todo.xml                # 待办事项列表项布局
+### item_todo.xml  # 待办事项列表项布局  ✔
+    - 神奇精美待办事项列表，超强实现
 
 ### │   │   │   │   │   ├── item_category.xml            # 分类列表项布局
 

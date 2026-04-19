@@ -38,6 +38,7 @@
     <color name="背景_文字">#000000</color>
     <color name="表面_文字">#000000</color>
     <color name="错误_文字">#FFFFFF</color>
+    <color name="次要文字">#757575</color>
 
     <!-- 状态栏和导航栏 -->
     <color name="状态栏_颜色">#6200EE</color>
