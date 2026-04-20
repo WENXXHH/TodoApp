@@ -52,7 +52,12 @@
 
 ## **utils/**
 
-### NotificationHelper.kt       # 通知管理工具类
+### NotificationHelper.kt  # 通知管理工具类  ✔
+    - 通知管理相关广播知识复习
+    - 创建通知渠道
+    - 构建提醒通知
+    - 处理通知点击跳转
+    - 管理通知ID
 
 ### DateTimeUtils.kt            # 日期时间格式化工具
 
@@ -75,7 +80,7 @@
 
 ###  BaseFragment.kt             # 基础Fragment封装（通用功能）
 
-##  **activity/**
+##  **activity/**  ✔
 
 ### MainActivity.kt # 主界面Activity（底部导航容器） ✔
     - 依旧优雅，依旧条理清晰
@@ -95,8 +100,13 @@
 
 ###  EditTodoActivity.kt   # 编辑待办事项Activity ✔
     - 依旧是优雅以及复杂的实现逻辑，等待模仿实现
-    
-###  ProfileActivity.kt          # 用户信息界面Activity
+
+###  ProfileActivity.kt  # 用户信息界面Activity  ✔
+    - 依旧精美个人界面逻辑处理
+    - 加载当前用户信息
+    - 处理头像上传
+    - 支持修改个人信息
+    - 实现退出登录功能
 
 ## **fragment/**
 
@@ -105,7 +115,11 @@
 
 ###  CategoryFragment.kt         # 分类管理Fragment
 
-###  ProfileFragment.kt          # 个人中心Fragment
+###  ProfileFragment.kt  # 个人中心Fragment  ✔
+    - 展示用户统计数据
+    - 处理功能项点击
+    - 跳转到详细设置
+    - 刷新用户信息
 
 ###  SettingsFragment.kt         # 设置管理Fragment
 
@@ -115,19 +129,38 @@
 
 ###  CategoryChip.kt             # 自定义分类标签组件
 
-## **service/**
+## **service/**  ✔
 
-###  ReminderService.kt          # 后台提醒服务（本地通知）
+###  ReminderService.kt  # 后台提醒服务（本地通知） ✔
+    - 复习Service相关的内容
+    - 检查当前需要提醒的事项
+    - 调用NotificationHelper发送通知
+    - 处理通知点击Intent
+    - 管理服务生命周期
 
-### BootReceiver.kt             # 开机启动广播接收器
+### BootReceiver.kt  # 开机启动广播接收器  ✔
+    - 依旧广播接收实例
+    - 监听系统启动完成广播
+    - 重新调度提醒任务
+    - 恢复后台服务
+    - 处理权限检查
 
-##  **application/**
+##  **application/**  ✔
 
 ###  TodoApplication.kt # Application类（全局初始化） ✔
     - 学习使用 companion object
     - 学习如何去创建通知渠道，复习广播组件
     - 学习设置全局异常处理，
     - 学习初始化第三方库
+
+##  **worker/**  ✔
+
+###  ReminderWorker.kt ✔
+    - WorkerManager相关的知识最好学习实践
+    - 使用WorkManager调度
+    - 定期检查提醒事项
+    - 处理失败重试逻辑
+    - 适配不同Android版本
 
 #  二，res/ ✔
 
@@ -148,7 +181,8 @@
 ###  activity_todo_form.xml # 添加待办事项布局  ✔
     - 精美添加待办事项的布局
 
-### │   │   │   │   │   ├── activity_profile.xml         # 用户信息界面布局
+### activity_profile.xml  # 用户信息界面布局  ✔
+    - 精美个人信息页示例
 
 ###  fragment_home.xml  # 首页Fragment布局 ✔
     - 学会处理recyclerview在fragment的使用方法，以前实现过，回去复习
@@ -157,7 +191,11 @@
 
 ### │   │   │   │   │   ├── fragment_category.xml        # 分类Fragment布局
 
-### │   │   │   │   │   ├── fragment_profile.xml         # 个人中心Fragment布局
+###  fragment_profile.xml  # 个人中心Fragment布局  ✔
+    - 设计快捷功能入口
+    - 显示统计信息
+    - 集成设置选项
+    - 添加版本信息
 
 ### │   │   │   │   │   ├── fragment_settings.xml        # 设置Fragment布局
 

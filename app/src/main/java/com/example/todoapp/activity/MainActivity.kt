@@ -1,5 +1,6 @@
 package com.example.todoapp.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -7,13 +8,19 @@ import android.widget.FrameLayout
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
+import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
 import com.example.todoapp.R
 import com.example.todoapp.base.BaseActivity
 import com.example.todoapp.fragment.CategoryFragment
 import com.example.todoapp.fragment.HomeFragment
 import com.example.todoapp.fragment.ProfileFragment
+import com.example.todoapp.service.ReminderService
+import com.example.todoapp.worker.ReminderWorker
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.activity.addCallback
+import java.util.concurrent.TimeUnit
 
 /**
  * **`MainActivity.kt`** - 主界面逻辑
@@ -55,6 +62,10 @@ class MainActivity : BaseActivity() {
 
         // 设置返回键处理
         setupBackHandler()
+
+        // 启动提醒服务和调度WorkManager任务
+        startReminderService()
+        scheduleReminderWorker()
     }
 
     /**
@@ -158,6 +169,40 @@ class MainActivity : BaseActivity() {
                 return true
             }
             else -> return super.onOptionsItemSelected(item)
+        }
+    }
+
+    /**
+     * 启动提醒服务
+     */
+    private fun startReminderService() {
+        try {
+            val intent = Intent(this, ReminderService::class.java)
+            startService(intent)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    /**
+     * 调度WorkManager提醒任务
+     */
+    private fun scheduleReminderWorker() {
+        try {
+            // 创建定期工作请求，每30分钟检查一次
+            val periodicWorkRequest = PeriodicWorkRequestBuilder<ReminderWorker>(
+                30, // 重复间隔
+                TimeUnit.MINUTES // 时间单位
+            ).build()
+
+            // 调度工作，使用现有策略，避免重复调度
+            WorkManager.getInstance(this).enqueueUniquePeriodicWork(
+                ReminderWorker.UNIQUE_WORK_NAME,
+                ExistingPeriodicWorkPolicy.KEEP,
+                periodicWorkRequest
+            )
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 }

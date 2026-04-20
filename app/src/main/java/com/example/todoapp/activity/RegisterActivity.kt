@@ -11,6 +11,7 @@ import com.example.todoapp.R
 import com.example.todoapp.base.BaseActivity
 import com.example.todoapp.data.model.User
 import com.example.todoapp.data.repository.UserRepository
+import com.example.todoapp.utils.PreferenceManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -35,9 +36,15 @@ class RegisterActivity : BaseActivity() {
     // 用户仓库
     private val userRepository = UserRepository()
     
+    // PreferenceManager
+    private lateinit var preferenceManager: PreferenceManager
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
+        
+        // 初始化PreferenceManager
+        preferenceManager = PreferenceManager(this)
         
         // 初始化UI组件
         initViews()
@@ -136,6 +143,8 @@ class RegisterActivity : BaseActivity() {
                     }
                     
                     if (loggedInUser != null) {
+                        // 保存当前登录用户ID
+                        preferenceManager.saveCurrentUserId(loggedInUser.id)
                         // 跳转到主界面
                         startActivity(Intent(this@RegisterActivity, MainActivity::class.java))
                         finish()

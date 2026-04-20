@@ -33,6 +33,7 @@ class EditTodoActivity : BaseActivity() {
     private lateinit var etTitle: EditText
     private lateinit var etDescription: EditText
     private lateinit var tvDueDate: TextView
+    private lateinit var tvReminder: TextView
     private lateinit var tvCategory: TextView
     private lateinit var swPin: Switch
     private lateinit var btnSave: Button
@@ -42,6 +43,7 @@ class EditTodoActivity : BaseActivity() {
     private var todoId: Long = 0
     private lateinit var todo: TodoItem
     private var dueTime: Long = 0
+    private var reminderTime: Long = 0
     private var categoryId: Long = 0
     private val todoRepository = TodoRepository()
 
@@ -78,6 +80,7 @@ class EditTodoActivity : BaseActivity() {
         etTitle = findViewById(R.id.et_title)
         etDescription = findViewById(R.id.et_description)
         tvDueDate = findViewById(R.id.tv_due_date)
+        tvReminder = findViewById(R.id.tv_reminder)
         tvCategory = findViewById(R.id.tv_category)
         swPin = findViewById(R.id.sw_pin)
         btnSave = findViewById(R.id.btn_save)
@@ -115,6 +118,7 @@ class EditTodoActivity : BaseActivity() {
             if (todoItem != null) {
                 todo = todoItem
                 dueTime = todo.dueTime
+                reminderTime = todo.reminderTime
                 categoryId = todo.categoryId
                 
                 runOnUiThread {
@@ -122,6 +126,9 @@ class EditTodoActivity : BaseActivity() {
                     etDescription.setText(todo.description)
                     if (todo.dueTime > 0) {
                         tvDueDate.text = DateTimeUtils.formatDateTime(todo.dueTime)
+                    }
+                    if (todo.reminderTime > 0) {
+                        tvReminder.text = DateTimeUtils.formatDateTime(todo.reminderTime)
                     }
                     swPin.isChecked = todo.isPinned
                 }
@@ -141,6 +148,11 @@ class EditTodoActivity : BaseActivity() {
         // 截止时间选择
         tvDueDate.setOnClickListener {
             showDateTimePicker()
+        }
+
+        // 提醒时间选择
+        tvReminder.setOnClickListener {
+            showReminderDateTimePicker()
         }
 
         // 分类选择
@@ -201,6 +213,46 @@ class EditTodoActivity : BaseActivity() {
     }
 
     /**
+     * 显示提醒日期时间选择器
+     */
+    private fun showReminderDateTimePicker() {
+        val calendar = Calendar.getInstance()
+        if (reminderTime > 0) {
+            calendar.timeInMillis = reminderTime
+        }
+
+        // 日期选择
+        val datePicker = DatePickerDialog(
+            this,
+            {
+                _, year, month, dayOfMonth ->
+                calendar.set(year, month, dayOfMonth)
+                
+                // 时间选择
+                val timePicker = TimePickerDialog(
+                    this,
+                    {
+                        _, hourOfDay, minute ->
+                        calendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
+                        calendar.set(Calendar.MINUTE, minute)
+                        
+                        reminderTime = calendar.timeInMillis
+                        tvReminder.text = DateTimeUtils.formatDateTime(reminderTime)
+                    },
+                    calendar.get(Calendar.HOUR_OF_DAY),
+                    calendar.get(Calendar.MINUTE),
+                    true
+                )
+                timePicker.show()
+            },
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        )
+        datePicker.show()
+    }
+
+    /**
      * 更新待办事项
      */
     private fun updateTodo() {
@@ -219,6 +271,7 @@ class EditTodoActivity : BaseActivity() {
             this.title = title
             this.description = description
             this.dueTime = dueTime
+            this.reminderTime = reminderTime
             this.isPinned = isPinned
             this.categoryId = categoryId
             this.updatedAt = System.currentTimeMillis()

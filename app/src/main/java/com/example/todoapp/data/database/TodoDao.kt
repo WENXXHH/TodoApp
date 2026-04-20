@@ -98,5 +98,13 @@ interface TodoDao {
      */
     @Query("SELECT * FROM todo_items WHERE due_time > 0 AND due_time < :currentTime AND is_completed = 0")
     suspend fun getOverdue(currentTime: Long): List<TodoItem>
+
+    /**
+     * 根据用户ID获取待办事项
+     * @param userId 用户ID
+     * @return 待办事项列表
+     */
+    @Query("SELECT * FROM todo_items WHERE user_id = :userId ORDER BY is_pinned DESC, updated_at DESC")
+    suspend fun getByUserId(userId: Long): List<TodoItem>
 }
 

@@ -28,6 +28,8 @@
     <color name="背景_颜色">#FFFFFF</color>
     <color name="表面">#FFFFFF</color>
     <color name="错误">#B00020</color>
+    <color name="成功">#4CAF50</color>
+    <color name="警告">#FFC107</color>
     <color name="白色">#FFFFFF</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>

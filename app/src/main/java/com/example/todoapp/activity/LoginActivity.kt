@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.todoapp.R
 import com.example.todoapp.base.BaseActivity
 import com.example.todoapp.data.repository.UserRepository
+import com.example.todoapp.utils.PreferenceManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -32,9 +33,15 @@ class LoginActivity : BaseActivity() {
     // 用户仓库
     private val userRepository = UserRepository()
     
+    // PreferenceManager
+    private lateinit var preferenceManager: PreferenceManager
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        
+        // 初始化PreferenceManager
+        preferenceManager = PreferenceManager(this)
         
         // 初始化UI组件
         initViews()
@@ -98,6 +105,8 @@ class LoginActivity : BaseActivity() {
                 
                 // 登录成功
                 if (user != null) {
+                    // 保存当前登录用户ID
+                    preferenceManager.saveCurrentUserId(user.id)
                     Toast.makeText(this@LoginActivity, "登录成功", Toast.LENGTH_SHORT).show()
                     // 跳转到主界面
                     startActivity(Intent(this@LoginActivity, MainActivity::class.java))

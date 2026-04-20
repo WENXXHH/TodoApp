@@ -137,5 +137,14 @@ class TodoRepository(private val todoDao: TodoDao) {
     suspend fun getOverdueTodos(): List<TodoItem> {
         return todoDao.getOverdue(System.currentTimeMillis())
     }
+
+    /**
+     * 根据用户ID获取待办事项
+     * @param userId 用户ID
+     * @return 待办事项列表
+     */
+    suspend fun getTodosByUserId(userId: Long): List<TodoItem> {
+        return todoDao.getByUserId(userId)
+    }
 }
 
