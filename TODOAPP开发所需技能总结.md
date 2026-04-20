@@ -19,6 +19,9 @@
     - 实现登录验证查询
     - 用户名唯一性检查
 
+#### CategoryDao.kt #分类数据访问接口  ✔
+    - 实现增删改查和统计功能
+
 ### model/
 
 #### TodoItem.kt  # 待办事项数据模型 ✔
@@ -32,6 +35,9 @@
     - 学会用与数据库储存的实体类创建，
     - 定义基本信息字段
     - 设置数据验证逻辑
+
+#### Category.kt  #分类数据模型  ✔
+    - 包含id、名称、颜色、图标等字段
 
 #### Reminder.kt              # 提醒数据模型
 
@@ -49,6 +55,9 @@
     - 封装用户注册流程
     - 实现登录认证逻辑
     - 处理用户信息更新
+
+#### CategoryRepository.kt  #分类业务逻辑封装  ✔
+    - 处理分类的验证和管理
 
 ## **utils/**
 
@@ -70,7 +79,8 @@
 ###  TodoAdapter.kt # 待办事项列表适配器  ✔
     - 依旧神奇难实现的适配器 ， 重新学习这一部分的内容是非常有必要的了
 
-###  CategoryAdapter.kt          # 分类列表适配器
+###  CategoryAdapter.kt  # 分类列表适配器  ✔
+    - 支持动态更新和点击事件
 
 ###  UserAdapter.kt               # 用户列表适配器
 
@@ -202,7 +212,8 @@
 ### item_todo.xml  # 待办事项列表项布局  ✔
     - 神奇精美待办事项列表，超强实现
 
-### │   │   │   │   │   ├── item_category.xml            # 分类列表项布局
+###  item_category.xml  # 分类列表项布局  ✔
+    - 分类列表项布局，包含颜色指示器、名称和待办数量
 
 ### │   │   │   │   │   ├── dialog_reminder.xml          # 提醒设置对话框布局
 
@@ -210,7 +221,7 @@
 
 ### │   │   │   │   │   └── toolbar_main.xml             # 通用工具栏布局
 
-## values/
+## values/  
 
 ### strings.xml # 字符串资源（多语言支持）  ✔
     - 统一管理字符串，有利于规范维护和管理
@@ -226,7 +237,11 @@
 
 ### │   │   │   │   │   ├── dimens.xml                   # 尺寸资源定义
 
-### │   │   │   │   │   ├── styles.xml                   # 样式资源定义
+###  styles.xml  # 样式资源定义  ✔
+    - 文本样式（标题、副标题、正文、按钮文字、标签文字）
+    - 按钮样式（主要、次要、文字按钮）
+    - 卡片样式（普通、高 elevation）
+    - 工具栏、对话框、FAB、Chip等组件样式
 
 ### │   │   │   │   │   ├── themes.xml                   # 主题资源定义
 
@@ -273,13 +288,31 @@
 
 ### │   │   │   │   │   └── todo_item_menu.xml           # 待办事项项菜单定义
 
-## anim/
+## anim/ ✔
 
-### │   │   │   │       ├── slide_in_right.xml           # 右滑进入动画
+### slide_in_right.xml  # 右滑进入动画 ✔
+    - 右滑进入动画
 
-### │   │   │   │       ├── slide_out_left.xml           # 左滑退出动画
+### slide_out_left.xml  # 左滑退出动画 ✔
+    - 左滑退出动画
 
-### │   │   │   │       └── fade_in.xml                  # 淡入动画
+### fade_in.xml  # 淡入动画 ✔
+    - 淡入动画
+
+### fade_out.xml  #淡出动画  ✔
+    - 淡出动画
+
+### scale_in.xml  #缩放进入动画 ✔
+    - 缩放进入动画
+
+### scale_out.xml  #缩放退出动画 ✔
+    - 缩放退出动画
+
+### slide_in_left.xml  #左滑进入动画 ✔
+    - 左滑进入动画
+
+### slide_out_right.xml  #右滑退出动画 ✔
+    - 右滑退出动画
 
 ## assets/    # 静态资源文件
 

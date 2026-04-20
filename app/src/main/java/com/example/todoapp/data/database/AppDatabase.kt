@@ -4,22 +4,24 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.todoapp.data.model.Category
 import com.example.todoapp.data.model.TodoItem
 import com.example.todoapp.data.model.User
 
 @Database(
-    entities = [User::class, TodoItem::class],
+    entities = [User::class, TodoItem::class, Category::class],
     version = 1
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun todoDao(): TodoDao
     abstract fun userDao(): UserDao
-    
+    abstract fun categoryDao(): CategoryDao
+
     companion object {
         // 数据库实例，静态变量存储
         lateinit var database: AppDatabase
             private set
-        
+
         /**
          * 初始化数据库
          * @param context 应用上下文
