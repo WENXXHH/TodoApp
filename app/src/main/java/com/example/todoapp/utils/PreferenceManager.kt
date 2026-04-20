@@ -42,4 +42,36 @@ class PreferenceManager(private val context: Context) {
     fun isLoggedIn(): Boolean {
         return getCurrentUserId() != -1L
     }
+
+    /**
+     * 保存通知开关状态
+     * @param enabled 是否启用
+     */
+    fun saveNotificationEnabled(enabled: Boolean) {
+        sharedPreferences.edit().putBoolean("notification_enabled", enabled).apply()
+    }
+
+    /**
+     * 获取通知开关状态
+     * @return 是否启用
+     */
+    fun isNotificationEnabled(): Boolean {
+        return sharedPreferences.getBoolean("notification_enabled", true)
+    }
+
+    /**
+     * 保存提醒开关状态
+     * @param enabled 是否启用
+     */
+    fun saveReminderEnabled(enabled: Boolean) {
+        sharedPreferences.edit().putBoolean("reminder_enabled", enabled).apply()
+    }
+
+    /**
+     * 获取提醒开关状态
+     * @return 是否启用
+     */
+    fun isReminderEnabled(): Boolean {
+        return sharedPreferences.getBoolean("reminder_enabled", true)
+    }
 }

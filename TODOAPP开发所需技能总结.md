@@ -2,9 +2,10 @@
 
 ## **data/**
 
-### database/
+### database/ ✔
 
-#### AppDatabase.kt           # Room数据库定义和初始化
+#### AppDatabase.kt # Room数据库定义和初始化 ✔
+    - Room数据库知识需要重新去学习
 
 #### TodoDao.kt # 待办事项数据访问接口  ✔
     - 去学习有关Dao有关的room知识
@@ -70,8 +71,6 @@
 
 ### DateTimeUtils.kt            # 日期时间格式化工具
 
-###  NetworkUtils.kt             # 网络状态检查工具
-
 ### PreferenceManager.kt         # SharedPreferences封装管理
 
 ## **adapter/**
@@ -84,11 +83,13 @@
 
 ###  UserAdapter.kt               # 用户列表适配器
 
-##  **base/**
+##  **base/**   ✔
 
-###  BaseActivity.kt             # 基础Activity封装（通用功能）
+###  BaseActivity.kt # 基础Activity封装（通用功能）  ✔
+    - 基础Activity
 
-###  BaseFragment.kt             # 基础Fragment封装（通用功能）
+###  BaseFragment.kt  # 基础Fragment封装（通用功能）  ✔
+    - 基础Fragment
 
 ##  **activity/**  ✔
 
@@ -135,8 +136,6 @@
 
 ## **widget/**
 
-###  TodoItemView.kt             # 自定义待办事项视图组件
-
 ###  CategoryChip.kt             # 自定义分类标签组件
 
 ## **service/**  ✔
@@ -172,7 +171,7 @@
     - 处理失败重试逻辑
     - 适配不同Android版本
 
-#  二，res/ ✔
+# 二，res/ ✔
 
 ##  **layout/** # XML布局文件目录
 
@@ -199,7 +198,7 @@
     - 处理空数据时的显示逻辑
     - 悬浮添加按钮的使用，依旧Materia Design 
 
-### │   │   │   │   │   ├── fragment_category.xml        # 分类Fragment布局
+### fragment_category.xml        # 分类Fragment布局
 
 ###  fragment_profile.xml  # 个人中心Fragment布局  ✔
     - 设计快捷功能入口
@@ -207,7 +206,7 @@
     - 集成设置选项
     - 添加版本信息
 
-### │   │   │   │   │   ├── fragment_settings.xml        # 设置Fragment布局
+### fragment_settings.xml        # 设置Fragment布局
 
 ### item_todo.xml  # 待办事项列表项布局  ✔
     - 神奇精美待办事项列表，超强实现
@@ -215,11 +214,11 @@
 ###  item_category.xml  # 分类列表项布局  ✔
     - 分类列表项布局，包含颜色指示器、名称和待办数量
 
-### │   │   │   │   │   ├── dialog_reminder.xml          # 提醒设置对话框布局
+###  mdialog_reminder.xml          # 提醒设置对话框布局
 
-### │   │   │   │   │   ├── dialog_category.xml          # 分类选择对话框布局
+###  dialog_category.xml          # 分类选择对话框布局
 
-### │   │   │   │   │   └── toolbar_main.xml             # 通用工具栏布局
+###  toolbar_main.xml             # 通用工具栏布局
 
 ## values/  
 
@@ -235,7 +234,7 @@
     - 依旧统一管理方便修改
     - 语法与用法同 string
 
-### │   │   │   │   │   ├── dimens.xml                   # 尺寸资源定义
+###  dimens.xml  # 尺寸资源定义
 
 ###  styles.xml  # 样式资源定义  ✔
     - 文本样式（标题、副标题、正文、按钮文字、标签文字）
@@ -243,81 +242,20 @@
     - 卡片样式（普通、高 elevation）
     - 工具栏、对话框、FAB、Chip等组件样式
 
-### │   │   │   │   │   ├── themes.xml                   # 主题资源定义
+### themes.xml  # 主题资源定义
 
-### │   │   │   │   │   └── arrays.xml                   # 数组资源定义
-
-##  drawable/
-
-### │   │   │   │   │   ├── ic_launcher_background.xml   # 启动图标背景
-
-### │   │   │   │   │   ├── ic_add.xml                   # 添加图标
-
-### │   │   │   │   │   ├── ic_delete.xml                # 删除图标
-
-### │   │   │   │   │   ├── ic_edit.xml                  # 编辑图标
-
-### │   │   │   │   │   ├── ic_check.xml                 # 完成图标
-
-### │   │   │   │   │   ├── ic_calendar.xml              # 日历图标
-
-### │   │   │   │   │   ├── ic_time.xml                  # 时间图标
-
-### │   │   │   │   │   ├── ic_user.xml                  # 用户图标
-
-### │   │   │   │   │   ├── ic_logout.xml                # 退出图标
-
-### │   │   │   │   │   ├── bg_button_primary.xml        # 主要按钮背景样式
-
-### │   │   │   │   │   ├── bg_todo_item.xml             # 待办事项项背景样式
-
-### │   │   │   │   │   └── bg_category_chip.xml         # 分类标签背景样式
-
-## mipmap/  # 应用图标资源
-
-### │   │   │   │   │   ├── ic_launcher.png              # 启动图标
-
-### │   │   │   │   │   └── ic_launcher_round.png        # 圆形启动图标
+###  arrays.xml # 数组资源定义
 
 ## menu/
 
 ###  bottom_nav_menu.xml # 底部导航菜单定义  ✔
     - 三个底部导航按键的定义设置
 
-### │   │   │   │   │   ├── toolbar_menu.xml             # 工具栏菜单定义
+### toolbar_menu.xml  # 工具栏菜单定义
 
-### │   │   │   │   │   └── todo_item_menu.xml           # 待办事项项菜单定义
+### todo_item_menu.xml  # 待办事项项菜单定义
 
-## anim/ ✔
-
-### slide_in_right.xml  # 右滑进入动画 ✔
-    - 右滑进入动画
-
-### slide_out_left.xml  # 左滑退出动画 ✔
-    - 左滑退出动画
-
-### fade_in.xml  # 淡入动画 ✔
-    - 淡入动画
-
-### fade_out.xml  #淡出动画  ✔
-    - 淡出动画
-
-### scale_in.xml  #缩放进入动画 ✔
-    - 缩放进入动画
-
-### scale_out.xml  #缩放退出动画 ✔
-    - 缩放退出动画
-
-### slide_in_left.xml  #左滑进入动画 ✔
-    - 左滑进入动画
-
-### slide_out_right.xml  #右滑退出动画 ✔
-    - 右滑退出动画
-
-## assets/    # 静态资源文件
-
-### │   │   │   │   └── categories.json                  # 默认分类数据
-
-# AndroidManifest.xml      # 应用清单文件（权限和组件注册）
+# 三，AndroidManifest.xml      # 应用清单文件（权限和组件注册）
     - 学会权限声明
     - 学会组件注册
+

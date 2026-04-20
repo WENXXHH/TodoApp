@@ -72,6 +72,12 @@ class TodoItem {
     var reminderTime: Long = 0
 
     /**
+     * 用户ID
+     */
+    @ColumnInfo(name = "user_id")
+    var userId: Long = 0
+
+    /**
      * 检查事项数据是否有效
      * @return 是否有效
      */

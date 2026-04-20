@@ -2,4 +2,44 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <!-- 编辑待办事项 -->
+    <item
+        android:id="@+id/action_edit"
+        android:title="编辑"
+        android:icon="@drawable/ic_edit"
+        app:showAsAction="ifRoom" />
+
+    <!-- 删除待办事项 -->
+    <item
+        android:id="@+id/action_delete"
+        android:title="删除"
+        android:icon="@drawable/ic_delete"
+        app:showAsAction="ifRoom" />
+
+    <!-- 置顶待办事项 -->
+    <item
+        android:id="@+id/action_pin"
+        android:title="置顶"
+        app:showAsAction="ifRoom" />
+
+    <!-- 取消置顶 -->
+    <item
+        android:id="@+id/action_unpin"
+        android:title="取消置顶"
+        app:showAsAction="ifRoom" />
+
+    <!-- 设置提醒 -->
+    <item
+        android:id="@+id/action_reminder"
+        android:title="设置提醒"
+        android:icon="@drawable/ic_time"
+        app:showAsAction="ifRoom" />
+
+    <!-- 分享待办事项 -->
+    <item
+        android:id="@+id/action_share"
+        android:title="分享"
+        app:showAsAction="ifRoom" />
+
 </menu>
+
