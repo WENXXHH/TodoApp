@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todoapp.R
@@ -15,11 +17,10 @@ import com.example.todoapp.activity.EditTodoActivity
 import com.example.todoapp.adapter.TodoAdapter
 import com.example.todoapp.base.BaseFragment
 import com.example.todoapp.data.model.TodoItem
-import com.example.todoapp.data.repository.TodoRepository
+import com.example.todoapp.viewmodel.TodoViewModel
+import com.example.todoapp.viewmodel.TodoViewModelFactory
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.collect
 
 /**
  * **`HomeFragment.kt`** - 首页Fragment逻辑
@@ -37,7 +38,7 @@ class HomeFragment : BaseFragment() {
 
     // 适配器和数据
     private lateinit var todoAdapter: TodoAdapter
-    private val todoRepository = TodoRepository()
+    private lateinit var todoViewModel: TodoViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,6 +49,9 @@ class HomeFragment : BaseFragment() {
         
         // 初始化UI组件
         initViews(view)
+        
+        // 初始化ViewModel
+        initViewModel()
         
         // 初始化RecyclerView
         initRecyclerView()
@@ -71,6 +75,37 @@ class HomeFragment : BaseFragment() {
         recyclerView = view.findViewById(R.id.recycler_view)
         fabAdd = view.findViewById(R.id.fab_add)
         emptyView = view.findViewById(R.id.empty_view)
+    }
+
+    /**
+     * 初始化ViewModel
+     */
+    private fun initViewModel() {
+        todoViewModel = ViewModelProvider(this, TodoViewModelFactory())[TodoViewModel::class.java]
+        
+        // 观察UI状态变化
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            todoViewModel.uiState.collect {
+                when {
+                    it.isLoading -> {
+                        // 显示加载状态
+                        showLoading()
+                    }
+                    it.error != null -> {
+                        // 显示错误信息
+                        showError(it.error)
+                    }
+                    it.isEmpty -> {
+                        // 显示空状态
+                        showEmptyView()
+                    }
+                    else -> {
+                        // 显示待办事项列表
+                        showTodoList(it.todos)
+                    }
+                }
+            }
+        }
     }
 
     /**
@@ -99,7 +134,7 @@ class HomeFragment : BaseFragment() {
             },
             onCompleteToggle = { todo ->
                 // 切换完成状态
-                toggleTodoCompletion(todo)
+                todoViewModel.toggleCompletion(todo)
             },
             onEditClick = { todo ->
                 // 编辑待办事项
@@ -109,7 +144,7 @@ class HomeFragment : BaseFragment() {
             },
             onDeleteClick = { todo ->
                 // 删除待办事项
-                deleteTodo(todo)
+                todoViewModel.deleteTodo(todo)
             }
         )
         recyclerView.adapter = todoAdapter
@@ -129,17 +164,21 @@ class HomeFragment : BaseFragment() {
      * 加载待办事项数据
      */
     private fun loadTodos() {
-        CoroutineScope(Dispatchers.IO).launch {
-            val todos = todoRepository.getAllTodos()
-            
-            requireActivity().runOnUiThread {
-                if (todos.isEmpty()) {
-                    showEmptyView()
-                } else {
-                    showTodoList(todos)
-                }
-            }
-        }
+        todoViewModel.loadTodos()
+    }
+
+    /**
+     * 显示加载状态
+     */
+    private fun showLoading() {
+        // 可以添加加载动画
+    }
+
+    /**
+     * 显示错误信息
+     */
+    private fun showError(error: String) {
+        Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show()
     }
 
     /**
@@ -157,28 +196,6 @@ class HomeFragment : BaseFragment() {
     private fun showEmptyView() {
         emptyView.visibility = View.VISIBLE
         recyclerView.visibility = View.GONE
-    }
-
-    /**
-     * 切换待办事项完成状态
-     */
-    private fun toggleTodoCompletion(todo: TodoItem) {
-        CoroutineScope(Dispatchers.IO).launch {
-            todoRepository.toggleTodoCompletion(todo)
-            // 重新加载数据
-            loadTodos()
-        }
-    }
-
-    /**
-     * 删除待办事项
-     */
-    private fun deleteTodo(todo: TodoItem) {
-        CoroutineScope(Dispatchers.IO).launch {
-            todoRepository.deleteTodo(todo)
-            // 重新加载数据
-            loadTodos()
-        }
     }
 
     /**

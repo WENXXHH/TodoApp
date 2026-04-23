@@ -9,14 +9,15 @@ import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.todoapp.R
 import com.example.todoapp.base.BaseActivity
 import com.example.todoapp.data.model.TodoItem
-import com.example.todoapp.data.repository.TodoRepository
 import com.example.todoapp.utils.DateTimeUtils
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.example.todoapp.viewmodel.AddTodoViewModel
+import com.example.todoapp.viewmodel.AddTodoViewModelFactory
+import kotlinx.coroutines.flow.collect
 import java.util.Calendar
 
 /**
@@ -42,7 +43,7 @@ class AddTodoActivity : BaseActivity() {
     private var dueTime: Long = 0
     private var reminderTime: Long = 0
     private var categoryId: Long = 0
-    private val todoRepository = TodoRepository()
+    private lateinit var addTodoViewModel: AddTodoViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +51,9 @@ class AddTodoActivity : BaseActivity() {
 
         // 初始化UI组件
         initViews()
+
+        // 初始化ViewModel
+        initViewModel()
 
         // 设置工具栏
         setupToolbar()
@@ -70,6 +74,33 @@ class AddTodoActivity : BaseActivity() {
         tvCategory = findViewById(R.id.tv_category)
         swPin = findViewById(R.id.sw_pin)
         btnSave = findViewById(R.id.btn_save)
+    }
+
+    /**
+     * 初始化ViewModel
+     */
+    private fun initViewModel() {
+        addTodoViewModel = ViewModelProvider(this, AddTodoViewModelFactory())[AddTodoViewModel::class.java]
+        
+        // 观察UI状态变化
+        lifecycleScope.launchWhenStarted {
+            addTodoViewModel.uiState.collect {
+                when {
+                    it.isSaving -> {
+                        // 显示保存中状态
+                        showSaving()
+                    }
+                    it.saveSuccess -> {
+                        // 保存成功
+                        showSaveSuccess()
+                    }
+                    it.error != null -> {
+                        // 显示错误信息
+                        showError(it.error)
+                    }
+                }
+            }
+        }
     }
 
     /**
@@ -209,18 +240,32 @@ class AddTodoActivity : BaseActivity() {
         }
 
         // 保存到数据库
-        CoroutineScope(Dispatchers.IO).launch {
-            val result = todoRepository.addTodo(todo)
-            
-            runOnUiThread {
-                if (result > 0) {
-                    Toast.makeText(this@AddTodoActivity, "添加成功", Toast.LENGTH_SHORT).show()
-                    finish()
-                } else {
-                    Toast.makeText(this@AddTodoActivity, "添加失败", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
+        addTodoViewModel.saveTodo(todo)
+    }
+
+    /**
+     * 显示保存中状态
+     */
+    private fun showSaving() {
+        btnSave.isEnabled = false
+        btnSave.text = "保存中..."
+    }
+
+    /**
+     * 显示保存成功
+     */
+    private fun showSaveSuccess() {
+        Toast.makeText(this, "添加成功", Toast.LENGTH_SHORT).show()
+        finish()
+    }
+
+    /**
+     * 显示错误信息
+     */
+    private fun showError(error: String) {
+        Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
+        btnSave.isEnabled = true
+        btnSave.text = "保存"
     }
 }
 
