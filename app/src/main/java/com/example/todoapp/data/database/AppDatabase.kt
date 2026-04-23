@@ -11,7 +11,8 @@ import com.example.todoapp.data.model.User
 
 @Database(
     entities = [User::class, TodoItem::class, Category::class, Reminder::class],
-    version = 1
+    version = 1,
+    exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun todoDao(): TodoDao
