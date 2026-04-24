@@ -19,7 +19,8 @@ import com.example.todoapp.data.model.Category
 class CategoryAdapter(
     private var categories: List<Category> = emptyList(),
     private var todoCounts: Map<Long, Int> = emptyMap(),
-    private val onCategoryClick: (Category) -> Unit = {}
+    private val onCategoryClick: (Category) -> Unit = {},
+    private val onCategoryLongClick: (Category) -> Boolean = { false }
 ) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
 
     /**
@@ -53,6 +54,10 @@ class CategoryAdapter(
 
         holder.itemView.setOnClickListener {
             onCategoryClick(category)
+        }
+
+        holder.itemView.setOnLongClickListener {
+            onCategoryLongClick(category)
         }
     }
 

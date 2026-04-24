@@ -51,4 +51,10 @@
     <color name="分类_个人">#FF5252</color>
     <color name="分类_购物">#4CAF50</color>
     <color name="分类_学习">#2196F3</color>
+
+    <!-- 颜色选择器颜色 -->
+    <color name="红色">#F44336</color>
+    <color name="绿色">#4CAF50</color>
+    <color name="蓝色">#2196F3</color>
+    <color name="黄色">#FF9800</color>
 </resources>

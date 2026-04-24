@@ -6,6 +6,11 @@ import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
 import com.example.todoapp.data.database.AppDatabase
+import com.example.todoapp.data.model.Category
+import com.example.todoapp.data.repository.CategoryRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 /**
  * 应用程序全局类，负责初始化应用级别的组件和服务
@@ -32,6 +37,9 @@ class TodoApplication : Application() {
         
         // 初始化Room数据库
         AppDatabase.init(applicationContext)
+        
+        // 初始化默认分类
+        initDefaultCategories()
         
         // 创建通知渠道（Android 8.0+）
         createNotificationChannels()
@@ -102,6 +110,43 @@ class TodoApplication : Application() {
         
         // 示例：初始化统计分析库
         // Analytics.init(this)
+    }
+
+    /**
+     * 初始化默认分类
+     * 当应用首次启动时，添加一些默认分类
+     */
+    private fun initDefaultCategories() {
+        CoroutineScope(Dispatchers.IO).launch {
+            val categoryRepository = CategoryRepository()
+            val categories = categoryRepository.getAllCategories()
+            
+            if (categories.isEmpty()) {
+                // 添加默认分类
+                val defaultCategories = listOf(
+                    Category().apply {
+                        name = "工作"
+                        color = "#6200EE" // 紫色
+                    },
+                    Category().apply {
+                        name = "学习"
+                        color = "#2196F3" // 蓝色
+                    },
+                    Category().apply {
+                        name = "生活"
+                        color = "#4CAF50" // 绿色
+                    },
+                    Category().apply {
+                        name = "其他"
+                        color = "#FF9800" // 黄色
+                    }
+                )
+                
+                defaultCategories.forEach {
+                    categoryRepository.addCategory(it)
+                }
+            }
+        }
     }
 }
 
