@@ -1,8 +1,10 @@
 package com.example.todoapp.activity
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Switch
@@ -11,13 +13,19 @@ import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.todoapp.R
+import com.example.todoapp.adapter.CategorySelectAdapter
 import com.example.todoapp.base.BaseActivity
+import com.example.todoapp.data.model.Category
 import com.example.todoapp.data.model.TodoItem
+import com.example.todoapp.data.repository.CategoryRepository
 import com.example.todoapp.utils.DateTimeUtils
 import com.example.todoapp.viewmodel.AddTodoViewModel
 import com.example.todoapp.viewmodel.AddTodoViewModelFactory
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import java.util.Calendar
 
 /**
@@ -43,7 +51,9 @@ class AddTodoActivity : BaseActivity() {
     private var dueTime: Long = 0
     private var reminderTime: Long = 0
     private var categoryId: Long = 0
+    private var selectedCategoryName: String = "未选择"
     private lateinit var addTodoViewModel: AddTodoViewModel
+    private val categoryRepository = CategoryRepository()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -131,8 +141,7 @@ class AddTodoActivity : BaseActivity() {
 
         // 分类选择
         tvCategory.setOnClickListener {
-            // 这里可以实现分类选择对话框
-            Toast.makeText(this, "分类选择功能待实现", Toast.LENGTH_SHORT).show()
+            showCategoryPickerDialog()
         }
 
         // 保存按钮
@@ -266,6 +275,66 @@ class AddTodoActivity : BaseActivity() {
         Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
         btnSave.isEnabled = true
         btnSave.text = "保存"
+    }
+
+    /**
+     * 显示分类选择对话框
+     */
+    private fun showCategoryPickerDialog() {
+        lifecycleScope.launch {
+            val categories = categoryRepository.getAllCategories()
+
+            if (categories.isEmpty()) {
+                Toast.makeText(this@AddTodoActivity, "暂无分类，请先添加分类", Toast.LENGTH_SHORT).show()
+                return@launch
+            }
+
+            val dialogView = LayoutInflater.from(this@AddTodoActivity)
+                .inflate(R.layout.dialog_category, null)
+
+            val recyclerView = dialogView.findViewById<RecyclerView>(R.id.rv_categories)
+            val btnCancel = dialogView.findViewById<Button>(R.id.btn_cancel)
+            val btnConfirm = dialogView.findViewById<Button>(R.id.btn_confirm)
+
+            val dialog = AlertDialog.Builder(this@AddTodoActivity)
+                .setView(dialogView)
+                .create()
+
+            var adapter = CategorySelectAdapter(
+                categories = categories,
+                selectedCategoryId = categoryId
+            )
+
+            adapter.setOnCategorySelectedListener { category ->
+                adapter.setSelectedCategory(category.id)
+            }
+
+            recyclerView.layoutManager = LinearLayoutManager(this@AddTodoActivity)
+            recyclerView.adapter = adapter
+
+            btnCancel.setOnClickListener {
+                dialog.dismiss()
+            }
+
+            btnConfirm.setOnClickListener {
+                val selectedId = adapter.getSelectedCategoryId()
+                if (selectedId > 0) {
+                    categoryId = selectedId
+                    val selectedCategory = categories.find { it.id == selectedId }
+                    if (selectedCategory != null) {
+                        selectedCategoryName = selectedCategory.name
+                        tvCategory.text = selectedCategoryName
+                    }
+                } else {
+                    categoryId = 0
+                    selectedCategoryName = "未选择"
+                    tvCategory.text = selectedCategoryName
+                }
+                dialog.dismiss()
+            }
+
+            dialog.show()
+        }
     }
 }
 
