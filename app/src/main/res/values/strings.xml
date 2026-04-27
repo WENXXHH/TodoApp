@@ -59,5 +59,7 @@
     <!-- 空状态提示 -->
     <string name="empty_todos">暂无待办事项，点击右下角添加</string>
     <string name="empty_categories">暂无分类，请添加分类</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

@@ -16,6 +16,7 @@ import com.example.todoapp.base.BaseActivity
 import com.example.todoapp.fragment.CategoryFragment
 import com.example.todoapp.fragment.HomeFragment
 import com.example.todoapp.fragment.ProfileFragment
+import com.example.todoapp.fragment.SettingsFragment
 import com.example.todoapp.service.ReminderService
 import com.example.todoapp.worker.ReminderWorker
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -40,6 +41,7 @@ class MainActivity : BaseActivity() {
     private lateinit var homeFragment: HomeFragment
     private lateinit var categoryFragment: CategoryFragment
     private lateinit var profileFragment: ProfileFragment
+    private lateinit var settingsFragment: SettingsFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,6 +86,7 @@ class MainActivity : BaseActivity() {
         homeFragment = HomeFragment()
         categoryFragment = CategoryFragment()
         profileFragment = ProfileFragment()
+        settingsFragment = SettingsFragment()
     }
 
     /**
@@ -112,6 +115,11 @@ class MainActivity : BaseActivity() {
                 R.id.nav_profile -> {
                     showFragment(profileFragment)
                     toolbar.title = "个人中心"
+                    true
+                }
+                R.id.nav_settings -> {
+                    showFragment(settingsFragment)
+                    toolbar.title = "设置"
                     true
                 }
                 else -> false

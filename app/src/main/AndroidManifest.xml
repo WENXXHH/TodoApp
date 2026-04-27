@@ -2,12 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.todoapp">
-
     <!-- 必要权限声明 -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"
+    <uses-permission
+        android:name="android.permission.FOREGROUND_SERVICE"
         tools:ignore="ForegroundServicesPolicy" />
 
     <application
@@ -19,18 +19,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TodoApp"
         tools:targetApi="31">
-
+        <activity
+            android:name="com.example.copytodoapp.base.BaseActivity"
+            android:exported="false" />
         <!-- 主Activity声明 -->
         <activity
             android:name=".activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <!-- 登录/注册Activity -->
+        </activity> <!-- 登录/注册Activity -->
         <activity
             android:name=".activity.LoginActivity"
             android:exported="false"
@@ -38,9 +39,7 @@
         <activity
             android:name=".activity.RegisterActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
-
-        <!-- 待办事项管理Activity -->
+            android:windowSoftInputMode="adjustResize" /> <!-- 待办事项管理Activity -->
         <activity
             android:name=".activity.AddTodoActivity"
             android:exported="false"
@@ -51,15 +50,11 @@
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".activity.ProfileActivity"
-            android:exported="false" />
-
-        <!-- 后台服务 -->
+            android:exported="false" /> <!-- 后台服务 -->
         <service
             android:name=".service.ReminderService"
             android:enabled="true"
-            android:exported="false" />
-
-        <!-- 广播接收器 -->
+            android:exported="false" /> <!-- 广播接收器 -->
         <receiver
             android:name=".service.BootReceiver"
             android:enabled="true"
@@ -68,7 +63,6 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-
     </application>
 
 </manifest>
